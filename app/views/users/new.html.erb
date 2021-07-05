@@ -1,2 +1,13 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<h1>Register here:</h1>
+<form action="/users/create" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label>Name</label>
+    <input type="text" placeholder="Name" name="join[name]">
+    <label>Email</label>
+    <input type="text" placeholder="Email" name="join[email]">
+    <label >Password</label>
+    <input type="password"  placeholder="Password" name="join[password]">
+    <label >Confirm Password</label>
+    <input type="password"  placeholder="Password Confirmation" name="join[password_confirmation]">
+    <input type="submit" value="Join">
+</form>
