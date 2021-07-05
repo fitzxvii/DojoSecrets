@@ -1,3 +1,27 @@
 <h1>Welcome, <%= @current_user.name %></h1>
 <p><a href="#">Edit Profile</a></p>
 <p><a href="/sessions/destroy">Log Out</a></p>
+
+<h1>Create new Secret</h1>
+<form action='/secrets/new' method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="user_id" value="<%= @current_user.id %>">
+    <label>Your New Secret:</label>
+    <textarea  name="Content"></textarea>
+    <input type="submit" value="Create Secret">
+</form>
+
+<h2>Your Secrets: </h2>
+<% @secrets.each do |secret| %>
+    <% if current_user == secret.user %>
+        <div>
+            <%= secret.content%>
+            <form action="/secrets/<%= secret.id %>" method="post" >
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" value="Delete Secret">
+            </form>
+        </div>
+    <% end %>
+<% end %>
+

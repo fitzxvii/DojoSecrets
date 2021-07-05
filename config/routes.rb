@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   get 'sessions/new'
   post 'sessions/create'
   get 'sessions/destroy'
+  get 'secrets' => 'secrets#index'
+  post 'secrets/new'
+  delete 'secrets/:id' => 'secrets#destroy'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
