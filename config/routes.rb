@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   get 'secrets' => 'secrets#index'
   post 'secrets/new'
   delete 'secrets/:id' => 'secrets#destroy'
+  post 'likes/:id' => 'likes#create'
+  delete 'likes/:id' => 'likes#destroy'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
