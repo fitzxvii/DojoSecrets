@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:create, :new]
+  before_action :check_user, only: [:edit, :show, :update, :delete]
 
   def new
   end
@@ -53,4 +54,9 @@ class UsersController < ApplicationController
   	  params.require(:join).permit(:name, :email, :password, :password_confirmation)
     end
 
+    def check_user
+      if current_user != User.find(params[:id])
+        redirect_to "/users/#{session[:user_id]}"
+      end
+    end
 end
