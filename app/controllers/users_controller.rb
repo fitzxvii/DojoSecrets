@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  skip_before_action :require_login, only: [:create, :new]
+  before_action :check_user, only: [:edit, :show, :update, :delete]
+
   def new
   end
 
@@ -36,13 +39,24 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id]).destroy
-    reset_session
-    redirect_to '/users/new'
+    @user = User.find(params[:id])
+    if @user.valid?
+      @user.destroy
+      reset_session
+      redirect_to '/users/new'
+    else
+      redirect_to '/sessions/new'
+    end
   end
 
   private
     def login_params
   	  params.require(:join).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def check_user
+      if current_user != User.find(params[:id])
+        redirect_to "/users/#{session[:user_id]}"
+      end
     end
 end
