@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   #sessions
   get 'sessions/new'
   post 'sessions/create'
-  delete 'sessions/destroy'
+  get 'sessions/destroy'
   #secrets
   get 'secrets' => 'secrets#index'
   post 'secrets/new'
